@@ -69,12 +69,12 @@ export class AuthService {
       user.email,
       user.id,
       user._token,
-      user._tokenExpirationDate
+      user._expiresIn
     );
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
-      const timer = new Date(user._tokenExpirationDate).getTime() - new Date().getTime();
+      const timer = new Date(user._expiresIn).getTime() - new Date().getTime();
       this.autoLogout(timer);
     }
   }
